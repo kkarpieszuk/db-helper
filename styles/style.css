@@ -1,0 +1,39 @@
+/*
+icon from
+https://www.smashingmagazine.com/2010/07/gcons-free-all-purpose-icons-for-designers-and-developers-100-icons-psd/
+*/
+
+.db_helper_plugin_menu_main_icon {
+	display: inline-block;
+	width: 20px !important;
+	height: 22px !important;
+	
+	background-image: url('../icons/database-white-24.png');
+	background-repeat: no-repeat;
+	background-position: 0px 2px;
+}
+
+.db_helper_plugin_menu_backup {
+	padding-bottom: 8px !important;
+}
+
+.db_helper_plugin_menu_backup input {
+	height: 28px !important;
+	border-radius: 3px !important;
+}
+
+.db_helper_plugin_menu_backup input.backup_dwn_file {
+	background-image: url('../icons/download.png');
+	background-color: white;
+	width: 40px !important;
+	position: relative !important;
+	top: 2px !important;
+	text-indent: -9999px;
+	background-position: 3px -2px;
+	background-repeat: no-repeat;
+	
+}
+
+.db_helper_plugin_menu_backup input.backup_dwn_file:hover {
+	cursor: pointer;
+}
