@@ -78,7 +78,7 @@ class DB_Helper_Backup_Database {
 			if ($all_from_table) {	
 				foreach($all_from_table as $all_from_table_row) {
 					foreach($all_from_table_row as $column_name => $value) {
-						$all_from_table_row[$column_name] = str_replace("\n","\\n",addslashes($value));
+						$all_from_table_row[$column_name] = str_replace("\n","\\n",str_replace("'", "\'", $value));
 					}
 
 					$values = implode("','", $all_from_table_row);
