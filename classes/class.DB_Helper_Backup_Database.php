@@ -63,7 +63,9 @@ class DB_Helper_Backup_Database {
 		$sql .= "SET unique_checks=0;\n";
 		$sql .= "SET foreign_key_checks=0;\n";
 	
-		$sql .= 'CREATE DATABASE IF NOT EXISTS '.$this->dbName.";\n\n";
+		if ($this->can_create_table()) {
+			$sql .= 'CREATE DATABASE IF NOT EXISTS '.$this->dbName.";\n\n";
+		}
 		$sql .= 'USE '.$this->dbName.";\n\n";
 		
 		$tables = $wpdb->get_results('SHOW TABLES', ARRAY_A);
@@ -129,6 +131,18 @@ class DB_Helper_Backup_Database {
 	
 	protected function gzip_enabled() {
 		return isset($_POST['dbhelper_gzip']) && $_POST['dbhelper_gzip'] == 1;
+	}
+	
+	private function can_create_table() {
+		global $wpdb;
+		
+		$privilages = $wpdb->get_var('SHOW GRANTS');
+		
+		if (stripos($privilages, 'all privileges')!==false || stripos($privilages, 'create,')!==false) {
+			return true;
+		}
+		
+		return false;
 	}
 
 	/**
