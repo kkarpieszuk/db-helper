@@ -61,7 +61,7 @@ class DB_Helper_Backup_Database {
 		
 		$sql = "SET autocommit=0;\n";
 		$sql .= "SET unique_checks=0;\n";
-		$sql .= "SET foreign_key_checks=0;'\n";
+		$sql .= "SET foreign_key_checks=0;\n";
 	
 		$sql .= 'CREATE DATABASE IF NOT EXISTS '.$this->dbName.";\n\n";
 		$sql .= 'USE '.$this->dbName.";\n\n";
