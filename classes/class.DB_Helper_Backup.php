@@ -5,7 +5,7 @@ class DB_Helper_Backup {
 	
 	public function __construct($DB_Helper_Backup_Database) {
 		$this->DB_Helper_Backup_Database = $DB_Helper_Backup_Database;
-		if (check_admin_referer( 'backup_dwn_file' )) {
+		if (check_admin_referer( 'backup_dwn_file' ) && current_user_can('activate_plugins')) {
 			$this->do_backup();
 		}
 	}

@@ -3,28 +3,30 @@
 class DB_Helper_Admin_Bar {
 	public function admin_bar_menu() {
 		global $wp_admin_bar;
-		
-		$wp_admin_bar->add_menu(
-			array(
-				'parent' => false,
-				'id' => 'db_helper_plugin_menu_top',
-				'title' => '<span class="db_helper_plugin_menu_main_icon"></span> DB Helper',
-				'meta'=> array(
-					'class' => 'db_helper_plugin_menu_main'
+
+		if (current_user_can('activate_plugins')) {
+			$wp_admin_bar->add_menu(
+				array(
+					'parent' => false,
+					'id' => 'db_helper_plugin_menu_top',
+					'title' => '<span class="db_helper_plugin_menu_main_icon"></span> DB Helper',
+					'meta'=> array(
+						'class' => 'db_helper_plugin_menu_main'
+					)
 				)
-			)
-		);
-		
-		$wp_admin_bar->add_menu(
-			array(
-				'parent' => 'db_helper_plugin_menu_top',
-				'id' => 'db_helper_plugin_menu_backup',
-				'title' => $this->backup_ui(),
-				'meta' => array(
-					'class' => 'db_helper_plugin_menu_backup'
+			);
+			
+			$wp_admin_bar->add_menu(
+				array(
+					'parent' => 'db_helper_plugin_menu_top',
+					'id' => 'db_helper_plugin_menu_backup',
+					'title' => $this->backup_ui(),
+					'meta' => array(
+						'class' => 'db_helper_plugin_menu_backup'
+					)
 				)
-			)
-		);
+			);	
+		}
 		
 	}
 	
