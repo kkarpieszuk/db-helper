@@ -58,8 +58,12 @@ class DB_Helper_Backup_Database {
     public function backupTables($outputDir = '.')
     {
 		global $wpdb;
+		
+		$sql = "SET autocommit=0;\n";
+		$sql .= "SET unique_checks=0;\n";
+		$sql .= "SET foreign_key_checks=0;'\n";
 	
-		$sql = 'CREATE DATABASE IF NOT EXISTS '.$this->dbName.";\n\n";
+		$sql .= 'CREATE DATABASE IF NOT EXISTS '.$this->dbName.";\n\n";
 		$sql .= 'USE '.$this->dbName.";\n\n";
 		
 		$tables = $wpdb->get_results('SHOW TABLES', ARRAY_A);
@@ -92,9 +96,9 @@ class DB_Helper_Backup_Database {
 			$sql .= "\n\n";
 		}
 		
-		if (isset($_POST['dbhelper_gzip']) && $_POST['dbhelper_gzip'] == 1) {
-			// $sql = gzcompress($sql);
-		}
+		$sql .= "COMMIT;\n";
+		$sql .= "SET unique_checks=1;\n";
+		$sql .= "SET foreign_key_checks=1;\n";
 		
 		return $this->sendFile($sql);
 		
