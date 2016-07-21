@@ -92,19 +92,39 @@ class DB_Helper_Backup_Database {
 			$sql .= "\n\n";
 		}
 		
+		if (isset($_POST['dbhelper_gzip']) && $_POST['dbhelper_gzip'] == 1) {
+			// $sql = gzcompress($sql);
+		}
+		
 		return $this->sendFile($sql);
 		
         
     }
 	
 	protected function sendFile($sql) {
-		$filename = sanitize_title($_POST['backup_file_name']) . ".sql";
+		$filename = sanitize_title($_POST['backup_file_name']) . ".sql";		
+		if ($this->gzip_enabled()) {
+			$filename .= ".gz";
+			header('Content-Type: application/gzip'); 
+		} else {
+			header('Content-Type: application/x-sql'); 
+		}
+		
 		header("HTTP/1.1 200 OK");
 		header('Content-Disposition: attachment; filename='.$filename);  
-		header('Content-Type: application/x-sql'); 
 		
+		if ($this->gzip_enabled()) {
+			ob_start("ob_gzhandler");
+		}
 		echo $sql;
+		if ($this->gzip_enabled()) {
+			ob_end_flush();
+		}
 		exit();
+	}
+	
+	protected function gzip_enabled() {
+		return isset($_POST['dbhelper_gzip']) && $_POST['dbhelper_gzip'] == 1;
 	}
 
 	/**

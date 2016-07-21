@@ -41,6 +41,7 @@ class DB_Helper_Admin_Bar {
 " . wp_nonce_field('backup_dwn_file', "_wpnonce", true , false) . "
 <input type='text' name='backup_file_name' value='{$this->default_file_name()}' class='submit'
 	title='".__("Choose file name", "dbhelper")."'>.sql
+		<input type='checkbox' name='dbhelper_gzip' value='1'>.gz
 </form>
 		";
 		
