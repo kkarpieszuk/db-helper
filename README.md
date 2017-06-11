@@ -1,5 +1,5 @@
 # db-helper
-DB Helper - WordPress plugin
+DB Helper - quickly export MySQL database from WordPress plugin
 
 Click to see it in action:
 
